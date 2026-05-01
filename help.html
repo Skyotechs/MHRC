@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHRC Help Center — EMS Rig Check Platform</title>
+  <meta name="description" content="Find answers, guides, and walkthroughs for the MHRC platform. Built for EMS agencies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1e3a6e;
+      --navy-dk: #162d58;
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --red:     #dc2626;
+      --green:   #16a34a;
+      --green-lt:#f0fdf4;
+      --white:   #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100:#f1f5f9;
+      --gray-200:#e2e8f0;
+      --gray-300:#cbd5e1;
+      --gray-400:#94a3b8;
+      --gray-500:#64748b;
+      --gray-700:#334155;
+      --gray-900:#0f172a;
+      --radius:  8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    .topbar { background: var(--white); border-bottom: 1px solid var(--gray-200); }
+    .topbar-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; height: 3.75rem; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 1.25rem; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -.02em; }
+    .brand span { color: var(--red); }
+    .topbar-links { display: flex; align-items: center; gap: 1rem; }
+    .topbar-links a { font-size: .875rem; color: var(--gray-500); text-decoration: none; transition: color .15s; }
+    .topbar-links a:hover { color: var(--navy); }
+    .btn-contact { background: var(--navy); color: white !important; padding: .45rem 1rem; border-radius: var(--radius); font-weight: 600; font-size: .85rem !important; }
+    .btn-contact:hover { background: var(--navy-dk); opacity: 1; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dk) 0%, #1a3560 50%, #243b6e 100%);
+      padding: 4rem 1.5rem 3.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: white; margin-bottom: .5rem; position: relative; }
+    .hero h1 em { font-style: normal; color: #93c5fd; }
+    .hero-sub { color: rgba(255,255,255,.65); margin-bottom: 2rem; font-size: .95rem; position: relative; }
+    .search-wrap { max-width: 36rem; margin: 0 auto; position: relative; z-index: 1; }
+    .search-input {
+      width: 100%; padding: .85rem 3rem .85rem 1.25rem; border-radius: 10px;
+      border: none; font-size: 1rem; font-family: inherit; outline: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25); color: var(--gray-900);
+    }
+    .search-input::placeholder { color: var(--gray-400); }
+    .search-icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray-400); pointer-events: none; }
+    .search-icon svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* BREADCRUMB */
+    .breadcrumb { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); padding: .75rem 1.5rem; font-size: .85rem; color: var(--gray-500); }
+    .breadcrumb-inner { max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { color: var(--gray-300); }
+
+    /* HUB */
+    .hub { padding: 3rem 1.5rem 4rem; }
+    .hub-inner { max-width: 72rem; margin: 0 auto; }
+    .hub-inner h2 { font-size: 1rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1.5rem; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0; }
+    .cat-card {
+      border-left: 3px solid var(--blue); border-bottom: 1px solid var(--gray-200);
+      padding: 1.5rem 1.5rem 1.5rem 1.25rem; cursor: pointer; transition: background .15s;
+    }
+    .cat-card:hover { background: var(--gray-50); }
+    .cat-card-title { font-weight: 700; font-size: 1rem; color: var(--gray-900); margin-bottom: .4rem; display: flex; align-items: center; gap: .5rem; }
+    .cat-card-icon { font-size: 1.1rem; }
+    .cat-card-desc { font-size: .875rem; color: var(--gray-500); margin-bottom: .75rem; line-height: 1.5; }
+    .cat-card-link { font-size: .875rem; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: .25rem; }
+    .cat-card-link svg { width: .9rem; height: .9rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* LAYOUT: CATEGORY/ARTICLE */
+    .layout { display: grid; grid-template-columns: 240px 1fr; max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; gap: 2.5rem; }
+    @media (max-width: 700px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* SIDEBAR */
+    .sidebar { flex-shrink: 0; }
+    .sidebar-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: .75rem; padding: 0 .5rem; }
+    .sidebar-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .55rem .75rem; border-radius: 6px; cursor: pointer;
+      font-size: .9rem; color: var(--gray-700); transition: background .12s, color .12s;
+    }
+    .sidebar-item:hover { background: var(--gray-100); color: var(--navy); }
+    .sidebar-item.active { background: var(--blue-lt); color: var(--blue); font-weight: 600; }
+    .sidebar-item svg { width: .8rem; height: .8rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; opacity: .5; }
+
+    /* CATEGORY VIEW */
+    .cat-view h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: .35rem; }
+    .cat-view .cat-desc { color: var(--gray-500); font-size: .95rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); }
+    .article-list { list-style: none; }
+    .article-list li { border-bottom: 1px solid var(--gray-100); }
+    .article-list li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem .25rem; text-decoration: none; color: var(--gray-800);
+      font-size: .95rem; transition: color .12s;
+    }
+    .article-list li a:hover { color: var(--blue); }
+    .article-list li a svg { width: .9rem; height: .9rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; color: var(--gray-300); }
+    .article-list li a:hover svg { color: var(--blue); }
+
+    /* ARTICLE VIEW */
+    .article-view { max-width: 680px; }
+    .article-view h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem; line-height: 1.2; }
+    .article-meta { font-size: .8rem; color: var(--gray-400); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); }
+    .article-body h2 { font-size: 1.1rem; font-weight: 700; margin: 1.75rem 0 .5rem; color: var(--gray-900); }
+    .article-body h3 { font-size: .975rem; font-weight: 700; margin: 1.25rem 0 .4rem; color: var(--gray-800); }
+    .article-body p { font-size: .95rem; color: var(--gray-600); margin-bottom: .85rem; line-height: 1.7; }
+    .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: .85rem; }
+    .article-body li { font-size: .95rem; color: var(--gray-600); margin-bottom: .3rem; line-height: 1.6; }
+    .article-body .tip {
+      background: var(--blue-lt); border-left: 3px solid var(--blue);
+      border-radius: 0 6px 6px 0; padding: .75rem 1rem; margin: 1rem 0;
+      font-size: .9rem; color: var(--gray-700);
+    }
+    .article-body .tip strong { color: var(--blue); }
+    .article-body .warn { background: #fefce8; border-left: 3px solid #ca8a04; border-radius: 0 6px 6px 0; padding: .75rem 1rem; margin: 1rem 0; font-size: .9rem; color: var(--gray-700); }
+    .article-body .warn strong { color: #92400e; }
+    .article-body code { background: var(--gray-100); padding: .1rem .4rem; border-radius: 4px; font-family: monospace; font-size: .85rem; }
+    .article-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200); gap: 1rem; }
+    .article-nav a { display: flex; align-items: center; gap: .4rem; font-size: .875rem; font-weight: 600; color: var(--blue); text-decoration: none; }
+    .article-nav a:hover { text-decoration: underline; }
+    .article-nav svg { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .article-nav .next { margin-left: auto; text-align: right; }
+
+    /* SEARCH RESULTS */
+    .search-results { padding: 2rem 1.5rem 4rem; max-width: 72rem; margin: 0 auto; }
+    .search-results h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .search-result-item { border-bottom: 1px solid var(--gray-100); padding: 1rem 0; cursor: pointer; }
+    .search-result-item h3 { font-size: .975rem; font-weight: 600; color: var(--blue); margin-bottom: .25rem; }
+    .search-result-item p { font-size: .875rem; color: var(--gray-500); }
+    .search-result-item:hover h3 { text-decoration: underline; }
+    .no-results { color: var(--gray-500); font-size: .95rem; text-align: center; padding: 3rem 0; }
+
+    /* FOOTER */
+    .help-footer { background: var(--navy); color: rgba(255,255,255,.65); padding: 2rem 1.5rem; text-align: center; font-size: .875rem; }
+    .help-footer a { color: rgba(255,255,255,.75); text-decoration: none; margin: 0 .75rem; }
+    .help-footer a:hover { color: white; }
+    .help-footer p { margin-top: .5rem; font-size: .8rem; color: rgba(255,255,255,.35); }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">MHRCEMS<span>.</span></a>
+    <div class="topbar-links">
+      <a href="index.html">Back to Site</a>
+      <a href="https://mobilehealthrc.com" target="_blank">Agency Login</a>
+      <a href="mailto:info@mobilehealthrc.com" class="btn-contact">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>How can <em>we</em> help you?</h1>
+  <p class="hero-sub">Search guides, walkthroughs, and answers for the MHRC platform.</p>
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="search-input" placeholder="Search for answers..." oninput="handleSearch(this.value)" />
+    <span class="search-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb" id="breadcrumb" style="display:none">
+  <div class="breadcrumb-inner" id="breadcrumb-inner"></div>
+</div>
+
+<!-- MAIN CONTENT AREA -->
+<div id="app"></div>
+
+<!-- FOOTER -->
+<footer class="help-footer">
+  <div>
+    <a href="index.html">Home</a>
+    <a href="mailto:info@mobilehealthrc.com">Contact Support</a>
+    <a href="https://mobilehealthrc.com" target="_blank">Agency Login</a>
+    <a href="https://mobilehealthrc.com/legal" target="_blank">Legal / Privacy</a>
+  </div>
+  <p>© <span id="yr"></span> Mobile Health Rig Checks, LLC</p>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── DATA ────────────────────────────────────────────────────────
+const CATEGORIES = [
+  {
+    id: 'getting-started',
+    name: 'Getting Started',
+    icon: '🚀',
+    desc: 'Tools, tips, and tricks for a successful rollout',
+    articles: [
+      {
+        id: 'what-is-mhrc',
+        title: 'What is MHRC?',
+        body: `
+<p>MHRC (Mobile Health Rig Checks) is a cloud-based EMS rig check platform designed to replace paper binders with a fast, reliable digital system. Every rig check, deficiency, fleet record, and inventory count is stored securely in the cloud and accessible from any smartphone or web browser.</p>
+<h2>Who uses MHRC?</h2>
+<p>MHRC is built for three roles:</p>
+<ul>
+  <li><strong>EMTs</strong> — complete rig checks, flag deficiencies, and review their personal history</li>
+  <li><strong>Chiefs</strong> — monitor the dashboard, approve deficiencies, manage the fleet, and track inventory</li>
+  <li><strong>Admins</strong> — manage users, configure agency settings, and export compliance data</li>
+</ul>
+<h2>What platforms does MHRC run on?</h2>
+<p>MHRC has two surfaces that share the same live data:</p>
+<ul>
+  <li><strong>Mobile App</strong> — native iOS and Android app for field crews. Available on the App Store and Google Play.</li>
+  <li><strong>Web Portal</strong> — full operations dashboard at <a href="https://mobilehealthrc.com" target="_blank">mobilehealthrc.com</a>. Works in any browser — no installation required.</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Chiefs and admins most commonly use the web portal. EMTs typically prefer the mobile app for in-vehicle check completion.</div>
+<h2>Why agencies switch to MHRC</h2>
+<ul>
+  <li>Nothing falls through the cracks — digital checklists guide every section</li>
+  <li>Real-time deficiency alerts mean issues are caught immediately, not during the next audit</li>
+  <li>Fleet registrations and certifications are tracked and flagged before they expire</li>
+  <li>Every rig check creates an automatic audit trail for liability protection</li>
+  <li>Onboarding takes less than one business day — no hardware, no IT department needed</li>
+</ul>
+        `
+      },
+      {
+        id: 'onboarding-your-agency',
+        title: 'Onboarding your agency',
+        body: `
+<p>Getting your agency live on MHRC takes less than one business day. Here's the typical sequence:</p>
+<h2>Step 1 — Request access</h2>
+<p>Fill out the demo request form at <a href="index.html">mhrcems.com</a> or email <a href="mailto:info@mobilehealthrc.com">info@mobilehealthrc.com</a>. Our team will provision your agency account and send an Admin invite link.</p>
+<h2>Step 2 — Configure your agency</h2>
+<p>Log in to the web portal and complete the agency profile: upload your logo, set your brand color, and review your checklist template. See <em>Account &amp; Setup → Setting up your agency profile</em> for details.</p>
+<h2>Step 3 — Add your trucks</h2>
+<p>Navigate to <strong>Fleet</strong> and add each unit. Include the unit number, type, year, and any upcoming inspection or registration due dates.</p>
+<h2>Step 4 — Invite your crew</h2>
+<p>Go to <strong>Users</strong> and add each crew member. Assign them a role (EMT, Chief, or Admin) and they'll receive an email invitation to set up their password.</p>
+<h2>Step 5 — Go live</h2>
+<p>Have your crew download the mobile app (or log in via browser) and complete their first rig check. The chief dashboard will update in real time.</p>
+<div class="tip"><strong>Tip:</strong> Do a test rig check on your first shift before the whole crew onboards. This helps you spot any template customizations you want before going live agency-wide.</div>
+        `
+      },
+      {
+        id: 'inviting-users',
+        title: 'Inviting your first users',
+        body: `
+<p>Adding users is done from the web portal by any Chief or Admin.</p>
+<h2>How to add a user</h2>
+<ol>
+  <li>Log in at <a href="https://mobilehealthrc.com" target="_blank">mobilehealthrc.com</a></li>
+  <li>Click <strong>Users</strong> in the left navigation</li>
+  <li>Click <strong>Add User</strong></li>
+  <li>Enter their name, email address, and select a role</li>
+  <li>Click <strong>Send Invite</strong></li>
+</ol>
+<p>The user will receive an email with a link to set their password. The link expires after 24 hours — if it expires, you can resend it from the Users page.</p>
+<h2>Roles explained</h2>
+<ul>
+  <li><strong>EMT</strong> — can complete rig checks, flag deficiencies, and view their own history</li>
+  <li><strong>Chief</strong> — everything EMTs can do, plus dashboard, deficiency approvals, fleet, and inventory management</li>
+  <li><strong>Admin</strong> — everything Chiefs can do, plus user management, agency branding, and billing</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Most agencies have 1–2 Admins and 2–4 Chiefs. The rest of the crew are EMTs.</div>
+        `
+      },
+      {
+        id: 'downloading-the-app',
+        title: 'Downloading the mobile app',
+        body: `
+<p>The MHRC mobile app is available for both iOS and Android.</p>
+<h2>iOS (iPhone / iPad)</h2>
+<ol>
+  <li>Open the <strong>App Store</strong></li>
+  <li>Search for <strong>"MHRC Rig Check"</strong></li>
+  <li>Tap <strong>Get</strong> to install</li>
+</ol>
+<h2>Android</h2>
+<ol>
+  <li>Open the <strong>Google Play Store</strong></li>
+  <li>Search for <strong>"MHRC Rig Check"</strong></li>
+  <li>Tap <strong>Install</strong></li>
+</ol>
+<h2>After installing</h2>
+<p>Open the app and tap <strong>Log In</strong>. Enter the email address your Admin used to invite you, and the password you set when you accepted the invite. If you haven't received an invite yet, ask your Admin to send one.</p>
+<div class="tip"><strong>Tip:</strong> After logging in, enable Face ID or Touch ID for faster access. You'll never have to type your password on-shift again.</div>
+        `
+      },
+      {
+        id: 'first-login',
+        title: 'Logging in for the first time',
+        body: `
+<p>Whether you're using the mobile app or the web portal, the login process is the same.</p>
+<h2>Web portal</h2>
+<ol>
+  <li>Go to <a href="https://mobilehealthrc.com" target="_blank">mobilehealthrc.com</a></li>
+  <li>Enter your email and password</li>
+  <li>Click <strong>Log In</strong></li>
+</ol>
+<h2>Mobile app</h2>
+<ol>
+  <li>Open the MHRC app</li>
+  <li>Enter your email and password</li>
+  <li>Tap <strong>Log In</strong></li>
+  <li>When prompted, enable Face ID or Touch ID for future logins</li>
+</ol>
+<h2>Forgot your password?</h2>
+<p>Click <strong>Forgot Password</strong> on the login screen. Enter your email and we'll send a reset link. The link is valid for 1 hour.</p>
+<div class="warn"><strong>Note:</strong> If you don't receive the reset email, check your spam folder. If you still don't see it, contact your agency Admin — they can trigger a resend from the Users page.</div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'account-setup',
+    name: 'Account & Setup',
+    icon: '⚙️',
+    desc: 'Manage your agency profile, branding, and billing',
+    articles: [
+      {
+        id: 'agency-profile',
+        title: 'Setting up your agency profile',
+        body: `
+<p>Your agency profile controls how MHRC appears across the platform — name, logo, and brand color. Only Admins can edit the agency profile.</p>
+<h2>How to access Agency Settings</h2>
+<ol>
+  <li>Log in at <a href="https://mobilehealthrc.com" target="_blank">mobilehealthrc.com</a></li>
+  <li>Click your name or the settings gear in the left navigation</li>
+  <li>Select <strong>Agency Settings</strong></li>
+</ol>
+<h2>Fields you can configure</h2>
+<ul>
+  <li><strong>Agency Name</strong> — displayed across the platform and in email notifications</li>
+  <li><strong>Agency Slug</strong> — a short URL identifier for your agency (set at onboarding, contact support to change)</li>
+  <li><strong>Logo</strong> — JPG or PNG, recommended 200×200px minimum</li>
+  <li><strong>Brand Color</strong> — hex color used for your dashboard accent</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Your brand color appears in the top nav bar on the web portal. Use your department's primary color to make the platform feel familiar to your crew.</div>
+        `
+      },
+      {
+        id: 'logo-branding',
+        title: 'Adding your logo and brand color',
+        body: `
+<p>Custom branding is available on the Pro and Enterprise plans. Free plan agencies use the default MHRC branding.</p>
+<h2>Adding your logo</h2>
+<ol>
+  <li>Go to <strong>Agency Settings</strong></li>
+  <li>Click <strong>Upload Logo</strong></li>
+  <li>Select a JPG or PNG file (max 5 MB)</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<p>Your logo will appear in the top navigation bar across the web portal for all users in your agency.</p>
+<h2>Setting your brand color</h2>
+<ol>
+  <li>In <strong>Agency Settings</strong>, find the <strong>Brand Color</strong> field</li>
+  <li>Enter a hex color code (e.g., <code>#1e3a6e</code>) or use the color picker</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<div class="warn"><strong>Note:</strong> Branding is a Pro and Enterprise feature. If you're on the Free plan, upgrade in the Billing section to unlock custom branding.</div>
+        `
+      },
+      {
+        id: 'subscription-plan',
+        title: 'Managing your subscription plan',
+        body: `
+<p>MHRC offers three plans to match the size and needs of your agency.</p>
+<h2>Plan comparison</h2>
+<ul>
+  <li><strong>Free</strong> — unlimited rig checks, mobile + web access, up to 3 trucks</li>
+  <li><strong>Pro</strong> — everything in Free, plus unlimited trucks, inventory management, CSV exports, and custom branding</li>
+  <li><strong>Enterprise</strong> — everything in Pro, plus priority support and multi-agency management</li>
+</ul>
+<h2>Viewing your current plan</h2>
+<ol>
+  <li>Go to <strong>Agency Settings → Billing</strong></li>
+  <li>Your current plan and renewal date are shown at the top</li>
+</ol>
+<h2>Upgrading or changing your plan</h2>
+<p>Click <strong>Upgrade Plan</strong> in the Billing section. You'll be redirected to a secure Stripe checkout page. After payment, your plan upgrades immediately.</p>
+<h2>Cancelling your plan</h2>
+<p>Click <strong>Manage Subscription</strong> in the Billing section. This opens the Stripe customer portal where you can cancel or modify your subscription. Your access continues until the end of the current billing period.</p>
+        `
+      },
+      {
+        id: 'contacting-support',
+        title: 'How to contact support',
+        body: `
+<p>Our team is available to help with setup, billing questions, and any technical issues.</p>
+<h2>Email support</h2>
+<p>Email us at <a href="mailto:info@mobilehealthrc.com">info@mobilehealthrc.com</a>. We respond within one business day (typically much faster).</p>
+<h2>Demo or onboarding call</h2>
+<p>If you're evaluating MHRC or have a complex setup, request a demo through the <a href="index.html#demo">demo form</a> and our team will schedule a call to walk through your agency's specific needs.</p>
+<h2>Emergency support (Enterprise)</h2>
+<p>Enterprise customers receive priority support with a faster response SLA. Contact us through the same email and reference your agency name.</p>
+        `
+      }
+    ]
+  },
+  {
+    id: 'rig-checks',
+    name: 'Rig Checks',
+    icon: '📋',
+    desc: 'Complete, review, and track vehicle rig checks',
+    articles: [
+      {
+        id: 'how-rig-checks-work',
+        title: 'How rig checks work',
+        body: `
+<p>A rig check is a structured inspection of a vehicle and its equipment before a shift. In MHRC, rig checks are based on a template your agency sets up — sections and items that every crew member works through in order.</p>
+<h2>The rig check flow</h2>
+<ol>
+  <li>The EMT selects a truck and starts a rig check</li>
+  <li>They work through each section (e.g., Airway, Cardiac, Vehicle Exterior)</li>
+  <li>Each item is marked as <strong>OK</strong>, or flagged as a <strong>Deficiency</strong></li>
+  <li>The EMT submits the check when complete</li>
+  <li>The check appears on the Chief's dashboard with a timestamp and status</li>
+</ol>
+<h2>What gets recorded</h2>
+<ul>
+  <li>Which EMT completed the check and when</li>
+  <li>Which truck was checked</li>
+  <li>All items marked OK</li>
+  <li>Any deficiencies, with notes</li>
+  <li>Total completion time</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> All rig checks are permanent records. Chiefs and Admins can review any historical check at any time — even after the shift ends.</div>
+        `
+      },
+      {
+        id: 'completing-a-rig-check',
+        title: 'Completing a rig check (EMT guide)',
+        body: `
+<p>This guide walks through completing a rig check on the mobile app. The web portal process is identical.</p>
+<h2>Starting a check</h2>
+<ol>
+  <li>Open the MHRC app and log in</li>
+  <li>Tap <strong>Start Rig Check</strong> on the home screen</li>
+  <li>Select your truck from the list</li>
+  <li>Tap <strong>Begin Check</strong></li>
+</ol>
+<h2>Working through sections</h2>
+<p>Each section contains a list of items. For each item:</p>
+<ul>
+  <li>Tap the <strong>checkmark</strong> if everything is OK</li>
+  <li>Tap <strong>Flag Deficiency</strong> if there's an issue — add a note describing what's wrong</li>
+</ul>
+<p>Swipe or tap <strong>Next Section</strong> when all items in a section are addressed.</p>
+<h2>Submitting the check</h2>
+<p>When you reach the final section, tap <strong>Submit Rig Check</strong>. You'll see a confirmation screen with a summary. The check is immediately visible on the chief's dashboard.</p>
+<div class="tip"><strong>Tip:</strong> You can flag a deficiency and still submit the check. The deficiency will be routed to your Chief for review and resolution.</div>
+        `
+      },
+      {
+        id: 'saving-progress',
+        title: 'Saving progress mid-shift',
+        body: `
+<p>MHRC automatically saves your progress as you go. You never lose your work if you get interrupted mid-check.</p>
+<h2>How auto-save works</h2>
+<p>Every item you mark is saved immediately to the server. If you close the app, lose signal, or switch tasks, your progress is preserved.</p>
+<h2>Resuming a check</h2>
+<ol>
+  <li>Open the app and tap <strong>Start Rig Check</strong></li>
+  <li>If you have an in-progress check, you'll see a banner: <strong>"Resume your check for [Truck]"</strong></li>
+  <li>Tap <strong>Resume</strong> to continue where you left off</li>
+</ol>
+<div class="warn"><strong>Note:</strong> Only one in-progress check per user per truck at a time. If you start a new check for the same truck, your previous progress will be discarded.</div>
+        `
+      },
+      {
+        id: 'rig-check-history',
+        title: 'Viewing your rig check history',
+        body: `
+<p>Every completed rig check is stored permanently and can be reviewed at any time.</p>
+<h2>For EMTs — your personal history</h2>
+<ol>
+  <li>In the app or web portal, tap <strong>My History</strong></li>
+  <li>You'll see all rig checks you've completed, sorted newest first</li>
+  <li>Tap any check to see the full detail — every section, every item, and any deficiencies you flagged</li>
+</ol>
+<h2>For Chiefs — full agency history</h2>
+<ol>
+  <li>Open the <strong>Dashboard</strong> in the web portal</li>
+  <li>Click <strong>Rig Checks</strong> in the left navigation</li>
+  <li>Filter by date, truck, or crew member</li>
+  <li>Click any check to view the complete record</li>
+</ol>
+<h2>Exporting history</h2>
+<p>Chiefs and Admins on the Pro or Enterprise plan can export rig check history as a CSV. See <em>Reports &amp; Exports</em> for details.</p>
+        `
+      }
+    ]
+  },
+  {
+    id: 'deficiencies',
+    name: 'Deficiencies & Approvals',
+    icon: '⚠️',
+    desc: 'Flag issues and manage the approval workflow',
+    articles: [
+      {
+        id: 'what-is-a-deficiency',
+        title: 'What is a deficiency?',
+        body: `
+<p>A deficiency is any item on a rig check that isn't in acceptable condition. When an EMT flags a deficiency, it kicks off a resolution workflow so the issue is tracked from discovery to fix.</p>
+<h2>Examples of deficiencies</h2>
+<ul>
+  <li>Missing medication or supply</li>
+  <li>Equipment that's damaged, expired, or not functioning</li>
+  <li>Vehicle issue (warning light, low fluid, damaged exterior)</li>
+  <li>Any item that would fail a compliance inspection</li>
+</ul>
+<h2>Why deficiencies matter</h2>
+<p>In a paper-based system, deficiencies often get missed, forgotten, or undocumented. MHRC's deficiency workflow ensures every flagged issue reaches the right person and gets resolved — with a complete audit trail for liability protection.</p>
+        `
+      },
+      {
+        id: 'how-to-flag-deficiency',
+        title: 'How to flag a deficiency',
+        body: `
+<p>Deficiencies are flagged during a rig check, item by item.</p>
+<h2>During a rig check</h2>
+<ol>
+  <li>When you reach an item with an issue, tap <strong>Flag Deficiency</strong> instead of the checkmark</li>
+  <li>Add a note describing the issue (e.g., "Laryngoscope blade cracked, needs replacement")</li>
+  <li>Tap <strong>Save &amp; Continue</strong></li>
+</ol>
+<p>You can flag multiple deficiencies in a single rig check. Continue through the remaining sections and submit when done.</p>
+<h2>After submission</h2>
+<p>The Chief receives an immediate push notification and email alert. The deficiency appears in their dashboard under <strong>Pending Deficiencies</strong>.</p>
+<div class="tip"><strong>Tip:</strong> Be as specific as possible in your deficiency notes. "Broken" is less useful than "O2 regulator gauge reads 0 — tank may be empty or valve stuck."</div>
+        `
+      },
+      {
+        id: 'approving-deficiencies',
+        title: 'How chiefs review and approve deficiencies',
+        body: `
+<p>Chiefs and Admins manage deficiencies from the web portal or mobile app.</p>
+<h2>Viewing pending deficiencies</h2>
+<ol>
+  <li>Open the <strong>Dashboard</strong></li>
+  <li>Click <strong>Deficiencies</strong> in the left navigation</li>
+  <li>You'll see all open deficiencies with the truck, item, EMT who flagged it, and their note</li>
+</ol>
+<h2>Approving / resolving a deficiency</h2>
+<ol>
+  <li>Click the deficiency to open it</li>
+  <li>Review the details and the EMT's note</li>
+  <li>Add a resolution note (e.g., "Replaced laryngoscope blade — stock from Station 2 supply room")</li>
+  <li>Click <strong>Mark Resolved</strong></li>
+</ol>
+<p>The EMT who flagged the deficiency receives a notification that it has been resolved.</p>
+<h2>Rejecting a deficiency</h2>
+<p>If a deficiency was flagged in error, click <strong>Reject</strong> and add a note explaining why. The EMT will be notified.</p>
+        `
+      },
+      {
+        id: 'deficiency-notifications',
+        title: 'Deficiency notifications and alerts',
+        body: `
+<p>MHRC sends notifications at every stage of the deficiency workflow so nothing is missed.</p>
+<h2>Who gets notified and when</h2>
+<ul>
+  <li><strong>Chiefs</strong> — immediately when any crew member flags a deficiency. Push notification (mobile) and email.</li>
+  <li><strong>EMT</strong> — when their deficiency is resolved or rejected by a Chief. Push notification and email.</li>
+</ul>
+<h2>Notification settings</h2>
+<p>Users can manage their notification preferences in their profile settings. Email notifications cannot be disabled for deficiency alerts — this is by design to ensure compliance.</p>
+<div class="tip"><strong>Tip:</strong> Chiefs can also see a real-time count of open deficiencies in the dashboard header at all times, even without enabling push notifications.</div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'fleet',
+    name: 'Fleet & Trucks',
+    icon: '🚑',
+    desc: 'Track vehicles, inspections, and certifications',
+    articles: [
+      {
+        id: 'adding-a-truck',
+        title: 'Adding a truck to your fleet',
+        body: `
+<p>Trucks (units) must be added before crew can run rig checks against them. Only Chiefs and Admins can add trucks.</p>
+<h2>How to add a truck</h2>
+<ol>
+  <li>Log in to the web portal and click <strong>Fleet</strong> in the left navigation</li>
+  <li>Click <strong>Add Truck</strong></li>
+  <li>Fill in the unit details:
+    <ul>
+      <li><strong>Unit Number</strong> — e.g., "Medic 7" or "Unit 301"</li>
+      <li><strong>Vehicle Type</strong> — ALS, BLS, fly car, etc.</li>
+      <li><strong>Year / Make / Model</strong></li>
+      <li><strong>VIN</strong> (optional)</li>
+    </ul>
+  </li>
+  <li>Add due dates for registration, inspection, and insurance</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<div class="warn"><strong>Free plan note:</strong> The Free plan supports up to 3 active trucks. If you need more, upgrade to the Pro plan in Agency Settings → Billing.</div>
+        `
+      },
+      {
+        id: 'fleet-due-dates',
+        title: 'Tracking inspection and registration due dates',
+        body: `
+<p>MHRC tracks due dates for each truck and sends alerts before they expire.</p>
+<h2>What MHRC tracks</h2>
+<ul>
+  <li>Annual vehicle inspection</li>
+  <li>Registration renewal</li>
+  <li>Insurance expiration</li>
+  <li>Custom due dates (for any other recurring requirement)</li>
+</ul>
+<h2>Setting up due dates</h2>
+<p>Due dates can be set when adding a truck, or edited at any time from the truck's detail page. Click a truck in the Fleet list, then click <strong>Edit</strong>.</p>
+<h2>When alerts fire</h2>
+<p>Chiefs receive a dashboard alert and email notification <strong>30 days</strong> before any due date, and again at <strong>7 days</strong> and on the <strong>due date</strong> itself.</p>
+<div class="tip"><strong>Tip:</strong> After renewing registration or passing inspection, update the due date in MHRC immediately so your records stay current.</div>
+        `
+      },
+      {
+        id: 'fleet-dashboard',
+        title: 'Fleet dashboard overview',
+        body: `
+<p>The Fleet page gives chiefs a single-screen view of every vehicle in the agency.</p>
+<h2>What you can see</h2>
+<ul>
+  <li>All active trucks with unit number, type, and status</li>
+  <li>Last rig check date for each truck</li>
+  <li>Upcoming due dates flagged in red (overdue) or amber (within 30 days)</li>
+  <li>Any open deficiencies linked to the truck</li>
+</ul>
+<h2>Truck detail page</h2>
+<p>Click any truck to see its full record: all rig checks ever run on it, every deficiency (resolved and open), and the full maintenance/certification history.</p>
+        `
+      }
+    ]
+  },
+  {
+    id: 'inventory',
+    name: 'Inventory',
+    icon: '📦',
+    desc: 'Monitor supplies across your locations',
+    articles: [
+      {
+        id: 'inventory-locations',
+        title: 'Setting up inventory locations',
+        body: `
+<p>Inventory in MHRC is organized by location. A location can be a vehicle, a station supply room, or any storage area your agency uses.</p>
+<h2>Adding a location</h2>
+<ol>
+  <li>Click <strong>Inventory</strong> in the left navigation</li>
+  <li>Click <strong>Manage Locations</strong></li>
+  <li>Click <strong>Add Location</strong></li>
+  <li>Give it a name (e.g., "Medic 7", "Station 1 Supply", "Controlled Substance Cabinet")</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<p>Pro plan agencies can have up to 5 locations. Enterprise supports unlimited locations.</p>
+<h2>Adding items to a location</h2>
+<ol>
+  <li>Open a location</li>
+  <li>Click <strong>Add Item</strong></li>
+  <li>Enter the item name, quantity, unit (e.g., "boxes", "mg", "each"), and set a minimum stock alert threshold</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+        `
+      },
+      {
+        id: 'monitoring-stock',
+        title: 'Monitoring stock levels',
+        body: `
+<p>The Inventory dashboard shows a real-time snapshot of every location's stock.</p>
+<h2>Stock status indicators</h2>
+<ul>
+  <li><strong>Green</strong> — stock is above the minimum threshold</li>
+  <li><strong>Amber</strong> — stock is at or near the minimum threshold</li>
+  <li><strong>Red</strong> — stock is below the minimum threshold</li>
+</ul>
+<h2>Updating quantities</h2>
+<ol>
+  <li>Open a location</li>
+  <li>Find the item and click <strong>Edit</strong></li>
+  <li>Update the quantity and click <strong>Save</strong></li>
+</ol>
+<p>Any Chief or Admin can update inventory counts at any time from the web portal or mobile app.</p>
+        `
+      },
+      {
+        id: 'inventory-transfers',
+        title: 'Transferring inventory between locations',
+        body: `
+<p>When supplies move between vehicles or storage areas, record the transfer in MHRC to keep counts accurate.</p>
+<h2>How to transfer inventory</h2>
+<ol>
+  <li>Go to <strong>Inventory</strong> and open the source location</li>
+  <li>Click <strong>Transfer</strong> next to the item</li>
+  <li>Select the destination location</li>
+  <li>Enter the quantity to transfer</li>
+  <li>Click <strong>Confirm Transfer</strong></li>
+</ol>
+<p>The quantity is deducted from the source and added to the destination automatically. The transfer is logged with a timestamp and the user who performed it.</p>
+        `
+      },
+      {
+        id: 'low-stock-alerts',
+        title: 'Low-stock alerts',
+        body: `
+<p>MHRC monitors stock levels continuously and alerts Chiefs when anything drops below its minimum threshold.</p>
+<h2>Setting a minimum threshold</h2>
+<p>When adding or editing an item, set the <strong>Minimum Stock</strong> field. When the current quantity falls to or below this number, an alert fires.</p>
+<h2>How alerts are delivered</h2>
+<ul>
+  <li><strong>Dashboard badge</strong> — a count of low-stock items appears on the Inventory icon in the left nav</li>
+  <li><strong>Email notification</strong> — Chiefs receive an email listing all items currently below threshold (sent once per day if any items are low)</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Set minimum thresholds that give you enough lead time to reorder. For critical supplies, set the threshold at 2–3 shifts worth of usage.</div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'users-roles',
+    name: 'Users & Roles',
+    icon: '👥',
+    desc: 'Add crew, assign roles, and manage access',
+    articles: [
+      {
+        id: 'roles-explained',
+        title: 'User roles explained',
+        body: `
+<p>Every user in MHRC has one of three roles. Roles control what a user can see and do across the platform.</p>
+<h2>EMT</h2>
+<ul>
+  <li>Complete rig checks</li>
+  <li>Flag deficiencies during checks</li>
+  <li>View their own rig check history</li>
+  <li>Update their profile and notification preferences</li>
+</ul>
+<h2>Chief</h2>
+<p>Everything an EMT can do, plus:</p>
+<ul>
+  <li>View the full agency dashboard</li>
+  <li>Review and approve/reject deficiencies</li>
+  <li>Manage the fleet (add, edit, view trucks)</li>
+  <li>Manage inventory across all locations</li>
+  <li>View all crew members' rig check history</li>
+  <li>Edit checklist templates</li>
+</ul>
+<h2>Admin</h2>
+<p>Everything a Chief can do, plus:</p>
+<ul>
+  <li>Add, edit, and deactivate users</li>
+  <li>Manage agency profile and branding</li>
+  <li>Manage billing and subscription</li>
+  <li>Export data (CSV)</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Most agencies have 1–2 Admins and a handful of Chiefs. There's no limit on the number of users at any role level.</div>
+        `
+      },
+      {
+        id: 'adding-users',
+        title: 'Adding a new user',
+        body: `
+<p>Only Chiefs and Admins can add users.</p>
+<h2>How to add a user</h2>
+<ol>
+  <li>Click <strong>Users</strong> in the left navigation</li>
+  <li>Click <strong>Add User</strong></li>
+  <li>Enter the user's <strong>First Name</strong>, <strong>Last Name</strong>, and <strong>Email</strong></li>
+  <li>Select their <strong>Role</strong> (EMT, Chief, or Admin)</li>
+  <li>Click <strong>Send Invite</strong></li>
+</ol>
+<p>The user receives an email with a link to set their password. The link is valid for 24 hours. If it expires, resend the invite from the Users page.</p>
+        `
+      },
+      {
+        id: 'editing-deactivating-users',
+        title: 'Editing or deactivating a user',
+        body: `
+<h2>Editing a user</h2>
+<ol>
+  <li>Click <strong>Users</strong> and find the user</li>
+  <li>Click their name to open their profile</li>
+  <li>Click <strong>Edit</strong></li>
+  <li>Update their name, email, or role</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<h2>Deactivating a user</h2>
+<p>When a crew member leaves, deactivate their account rather than deleting it. This preserves their historical rig check records.</p>
+<ol>
+  <li>Open the user's profile</li>
+  <li>Click <strong>Deactivate Account</strong></li>
+  <li>Confirm when prompted</li>
+</ol>
+<p>Deactivated users can no longer log in. Their completed rig checks remain in the system for audit purposes.</p>
+<div class="warn"><strong>Note:</strong> Deactivation is reversible. You can reactivate a user from the Users page by filtering for "Inactive" users.</div>
+        `
+      },
+      {
+        id: 'password-reset',
+        title: "Resetting a user's password",
+        body: `
+<h2>User-initiated reset</h2>
+<p>Users can reset their own password from the login screen at any time by clicking <strong>Forgot Password</strong>.</p>
+<h2>Admin-initiated reset</h2>
+<p>If a user is locked out and can't access their email, an Admin can trigger a password reset from the Users page:</p>
+<ol>
+  <li>Click <strong>Users</strong> and find the user</li>
+  <li>Click their name, then click <strong>Send Password Reset</strong></li>
+  <li>The user will receive an email with a reset link (valid for 1 hour)</li>
+</ol>
+<div class="tip"><strong>Tip:</strong> If the user isn't receiving emails, verify their email address in their profile. Emails may also be filtered to spam — have them check there first.</div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'templates',
+    name: 'Checklist Templates',
+    icon: '📝',
+    desc: 'Build and edit the checklists your crew uses',
+    articles: [
+      {
+        id: 'what-are-templates',
+        title: 'What are checklist templates?',
+        body: `
+<p>A checklist template defines the sections and items every EMT works through during a rig check. Your agency has one template, and it applies to all trucks.</p>
+<h2>Default template</h2>
+<p>When your agency is first provisioned, MHRC sets up a default template based on common EMS rig check standards. You can edit it at any time.</p>
+<h2>Template structure</h2>
+<ul>
+  <li><strong>Sections</strong> — top-level groupings (e.g., "Airway", "Cardiac", "Vehicle Exterior")</li>
+  <li><strong>Items</strong> — individual checkable items within each section (e.g., "BVM – Adult", "AED pads – unexpired")</li>
+</ul>
+<p>Sections can be reordered, renamed, or removed. Items can be added, edited, or removed within any section.</p>
+        `
+      },
+      {
+        id: 'editing-templates',
+        title: 'Editing your checklist',
+        body: `
+<p>Only Chiefs and Admins can edit the checklist template.</p>
+<h2>How to access the template editor</h2>
+<ol>
+  <li>Click <strong>Templates</strong> in the left navigation</li>
+  <li>Your current template opens in the editor</li>
+</ol>
+<h2>Adding a section</h2>
+<ol>
+  <li>Click <strong>Add Section</strong> at the bottom of the section list</li>
+  <li>Enter a section name</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<h2>Adding an item to a section</h2>
+<ol>
+  <li>Open the section</li>
+  <li>Click <strong>Add Item</strong></li>
+  <li>Enter the item name (and optionally a description or note for the EMT)</li>
+  <li>Click <strong>Save</strong></li>
+</ol>
+<h2>Reordering sections or items</h2>
+<p>Drag and drop sections and items to reorder them. The new order saves automatically.</p>
+<h2>Removing an item or section</h2>
+<p>Click the trash icon next to any item or section. Removing a section removes all items inside it.</p>
+<div class="warn"><strong>Note:</strong> Removing an item does not delete it from historical rig checks — old records are preserved exactly as they were completed.</div>
+        `
+      },
+      {
+        id: 'publishing-templates',
+        title: 'Publishing template changes',
+        body: `
+<p>Changes to the checklist template take effect immediately — there is no separate publish step.</p>
+<h2>When changes go live</h2>
+<p>As soon as you save a change (add, edit, or remove a section or item), all subsequent rig checks will reflect the new template. Rig checks that are already in progress will complete with the template that was active when they started.</p>
+<h2>Best practice</h2>
+<p>Notify your crew before making significant template changes, especially if you're adding new sections or removing items. A brief station announcement or text message is usually sufficient.</p>
+<div class="tip"><strong>Tip:</strong> Make template edits at the start of a new shift cycle — not mid-shift — to avoid confusion for crews actively completing checks.</div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'mobile-app',
+    name: 'Mobile App',
+    icon: '📱',
+    desc: 'Get the iOS and Android app set up',
+    articles: [
+      {
+        id: 'app-download',
+        title: 'Downloading and installing the app',
+        body: `
+<h2>iOS</h2>
+<ol>
+  <li>Open the <strong>App Store</strong> on your iPhone or iPad</li>
+  <li>Search for <strong>MHRC Rig Check</strong></li>
+  <li>Tap <strong>Get</strong></li>
+</ol>
+<h2>Android</h2>
+<ol>
+  <li>Open the <strong>Google Play Store</strong></li>
+  <li>Search for <strong>MHRC Rig Check</strong></li>
+  <li>Tap <strong>Install</strong></li>
+</ol>
+<p>The app is free to download. You'll need an active MHRC account to log in — your Admin sets that up for you.</p>
+        `
+      },
+      {
+        id: 'biometric-login',
+        title: 'Biometric login (Face ID / Touch ID)',
+        body: `
+<p>The MHRC app supports Face ID and Touch ID so you never have to type your password on-shift.</p>
+<h2>Setting up biometric login</h2>
+<ol>
+  <li>Log in with your email and password (required once)</li>
+  <li>When prompted <em>"Enable Face ID for faster login?"</em>, tap <strong>Enable</strong></li>
+  <li>Authenticate with your face or fingerprint once to confirm</li>
+</ol>
+<p>On all future logins, just tap <strong>Log In with Face ID</strong> (or Touch ID) on the login screen.</p>
+<h2>Disabling biometric login</h2>
+<ol>
+  <li>Go to your <strong>Profile</strong> tab in the app</li>
+  <li>Tap <strong>Security</strong></li>
+  <li>Toggle <strong>Face ID / Touch ID</strong> off</li>
+</ol>
+<div class="tip"><strong>Tip:</strong> Biometric login is device-specific. If you get a new phone, you'll need to re-enable it after logging in with your password on the new device.</div>
+        `
+      },
+      {
+        id: 'push-notifications',
+        title: 'Push notifications',
+        body: `
+<p>The MHRC app sends push notifications to keep chiefs and EMTs informed in real time.</p>
+<h2>What triggers a push notification</h2>
+<ul>
+  <li><strong>Chiefs</strong> — new deficiency flagged by any crew member</li>
+  <li><strong>Chiefs</strong> — fleet due date coming up (30 days, 7 days, day-of)</li>
+  <li><strong>Chiefs</strong> — inventory item falls below minimum threshold</li>
+  <li><strong>EMTs</strong> — their deficiency was resolved or rejected by a Chief</li>
+</ul>
+<h2>Enabling notifications</h2>
+<p>When you first open the app, you'll be prompted to allow notifications. Tap <strong>Allow</strong>. If you accidentally denied them, go to your phone's <strong>Settings → MHRC → Notifications</strong> and toggle them on.</p>
+        `
+      }
+    ]
+  },
+  {
+    id: 'reports',
+    name: 'Reports & Exports',
+    icon: '📊',
+    desc: 'Download and export your data',
+    articles: [
+      {
+        id: 'export-rig-checks',
+        title: 'Exporting rig check data (CSV)',
+        body: `
+<p>Admins on the Pro or Enterprise plan can export rig check data as a CSV file. This is useful for external reporting, compliance audits, or analysis in Excel.</p>
+<h2>How to export</h2>
+<ol>
+  <li>Click <strong>Reports</strong> in the left navigation</li>
+  <li>Select <strong>Rig Checks</strong></li>
+  <li>Set your date range and any filters (truck, crew member)</li>
+  <li>Click <strong>Export CSV</strong></li>
+  <li>The file downloads immediately</li>
+</ol>
+<h2>What's included in the export</h2>
+<ul>
+  <li>Check date and time</li>
+  <li>EMT name</li>
+  <li>Truck / unit</li>
+  <li>All items and their status (OK or Deficiency)</li>
+  <li>Deficiency notes and resolution status</li>
+</ul>
+<div class="warn"><strong>Plan requirement:</strong> CSV exports require the Pro or Enterprise plan.</div>
+        `
+      },
+      {
+        id: 'export-fleet',
+        title: 'Exporting fleet data',
+        body: `
+<p>Export a snapshot of your entire fleet including due dates and inspection status.</p>
+<h2>How to export</h2>
+<ol>
+  <li>Click <strong>Reports</strong> → <strong>Fleet</strong></li>
+  <li>Click <strong>Export CSV</strong></li>
+</ol>
+<h2>What's included</h2>
+<ul>
+  <li>Unit number, type, year, make, model, VIN</li>
+  <li>Inspection due date</li>
+  <li>Registration due date</li>
+  <li>Insurance expiration date</li>
+  <li>Last rig check date</li>
+  <li>Open deficiency count</li>
+</ul>
+        `
+      },
+      {
+        id: 'export-inventory',
+        title: 'Exporting inventory data',
+        body: `
+<p>Get a full snapshot of your inventory across all locations.</p>
+<h2>How to export</h2>
+<ol>
+  <li>Click <strong>Reports</strong> → <strong>Inventory</strong></li>
+  <li>Optionally filter by location</li>
+  <li>Click <strong>Export CSV</strong></li>
+</ol>
+<h2>What's included</h2>
+<ul>
+  <li>Location name</li>
+  <li>Item name</li>
+  <li>Current quantity</li>
+  <li>Unit</li>
+  <li>Minimum threshold</li>
+  <li>Status (OK / Low / Critical)</li>
+  <li>Last updated date</li>
+</ul>
+        `
+      }
+    ]
+  },
+  {
+    id: 'faq',
+    name: 'FAQs',
+    icon: '❓',
+    desc: 'Common questions answered',
+    articles: [
+      {
+        id: 'free-plan-truck-limit',
+        title: 'How many trucks can I have on the Free plan?',
+        body: `
+<p>The Free plan supports up to <strong>3 active trucks</strong>. If your agency operates more than 3 units, you'll need to upgrade to the Pro or Enterprise plan.</p>
+<p>Upgrade at any time from <strong>Agency Settings → Billing</strong>. The upgrade takes effect immediately and your existing truck data is preserved.</p>
+        `
+      },
+      {
+        id: 'can-emts-see-others',
+        title: "Can EMTs see other crew members' checks?",
+        body: `
+<p><strong>No.</strong> By default, EMTs can only see their own rig check history. They cannot see checks completed by other EMTs.</p>
+<p>Chiefs and Admins can see all rig checks across all crew members. This is by design — chiefs need visibility for compliance and oversight, while EMTs see only their own records to protect privacy and reduce noise.</p>
+        `
+      },
+      {
+        id: 'data-security',
+        title: 'Is my data secure?',
+        body: `
+<p>Yes. MHRC takes data security seriously across the entire platform.</p>
+<h2>Encryption</h2>
+<p>All data is encrypted in transit (TLS 1.3) and at rest. Passwords are hashed using Argon2, an industry-leading hashing algorithm.</p>
+<h2>Access control</h2>
+<p>Role-based access control ensures each user can only see and do what their role permits. EMT data is isolated from other EMTs. Agency data is isolated from other agencies.</p>
+<h2>Backups</h2>
+<p>Your data is backed up continuously. In the event of a database failure, data is recoverable to within minutes of the incident.</p>
+<h2>Compliance</h2>
+<p>MHRC does not store Protected Health Information (PHI). Rig checks record equipment status and vehicle condition — not patient information.</p>
+        `
+      },
+      {
+        id: 'offline-mode',
+        title: 'What happens if I lose internet connection?',
+        body: `
+<p>The MHRC mobile app is designed to handle intermittent connectivity gracefully.</p>
+<h2>During a rig check</h2>
+<p>If you lose signal mid-check, your progress is cached locally on the device. The app will continue to function normally. When connectivity is restored, your data syncs automatically.</p>
+<h2>Starting a check offline</h2>
+<p>If you open the app without internet, your most recent checklist template and truck list are cached. You can start and complete a rig check fully offline. It will sync to the server when you're back online.</p>
+<div class="warn"><strong>Note:</strong> Offline support works best when you've opened the app at least once while connected. Cold-starting the app completely offline without any prior cache may limit functionality.</div>
+        `
+      },
+      {
+        id: 'cancel-subscription',
+        title: 'How do I cancel my subscription?',
+        body: `
+<p>You can cancel at any time — no penalties, no cancellation fees.</p>
+<h2>How to cancel</h2>
+<ol>
+  <li>Log in as an Admin</li>
+  <li>Go to <strong>Agency Settings → Billing</strong></li>
+  <li>Click <strong>Manage Subscription</strong></li>
+  <li>In the Stripe customer portal, click <strong>Cancel Plan</strong></li>
+</ol>
+<p>Your Pro or Enterprise access continues until the end of your current billing period. After that, your agency automatically transitions to the Free plan — your data is preserved, and you keep up to 3 trucks.</p>
+<p>If you have any issues cancelling, email us at <a href="mailto:info@mobilehealthrc.com">info@mobilehealthrc.com</a> and we'll handle it promptly.</p>
+        `
+      }
+    ]
+  }
+];
+
+// ── ROUTING ──────────────────────────────────────────────────────
+function getRoute() {
+  const hash = location.hash.replace('#', '');
+  if (!hash) return { view: 'hub' };
+  const parts = hash.split('/');
+  const catId = parts[0];
+  const artId = parts[1];
+  const cat = CATEGORIES.find(c => c.id === catId);
+  if (!cat) return { view: 'hub' };
+  if (!artId) return { view: 'category', cat };
+  const art = cat.articles.find(a => a.id === artId);
+  if (!art) return { view: 'category', cat };
+  return { view: 'article', cat, art };
+}
+
+function navigate(hash) {
+  location.hash = hash || '';
+  render();
+  window.scrollTo(0, 0);
+}
+
+// ── RENDER ───────────────────────────────────────────────────────
+function render() {
+  const route = getRoute();
+  const app = document.getElementById('app');
+  const bc = document.getElementById('breadcrumb');
+  const bci = document.getElementById('breadcrumb-inner');
+  const sq = document.getElementById('search-input').value.trim();
+
+  if (sq.length > 1) {
+    renderSearch(app, sq);
+    bc.style.display = 'none';
+    return;
+  }
+
+  if (route.view === 'hub') {
+    renderHub(app);
+    bc.style.display = 'none';
+  } else if (route.view === 'category') {
+    renderCategory(app, route.cat);
+    bc.style.display = '';
+    bci.innerHTML = `<a href="#" onclick="navigate('');return false;">Help Center</a><span class="sep">›</span><span>${route.cat.name}</span>`;
+  } else if (route.view === 'article') {
+    renderArticle(app, route.cat, route.art);
+    bc.style.display = '';
+    bci.innerHTML = `<a href="#" onclick="navigate('');return false;">Help Center</a><span class="sep">›</span><a href="#${route.cat.id}" onclick="navigate('${route.cat.id}');return false;">${route.cat.name}</a><span class="sep">›</span><span>${route.art.title}</span>`;
+  }
+}
+
+function renderHub(app) {
+  app.innerHTML = `
+    <div class="hub">
+      <div class="hub-inner">
+        <h2>All topics</h2>
+        <div class="cat-grid">
+          ${CATEGORIES.map(c => `
+            <div class="cat-card" onclick="navigate('${c.id}')">
+              <div class="cat-card-title"><span class="cat-card-icon">${c.icon}</span>${c.name}</div>
+              <div class="cat-card-desc">${c.desc}</div>
+              <span class="cat-card-link">See more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderSidebar(activeCatId) {
+  return `
+    <aside class="sidebar">
+      <div class="sidebar-title">All Topics</div>
+      ${CATEGORIES.map(c => `
+        <div class="sidebar-item ${c.id === activeCatId ? 'active' : ''}" onclick="navigate('${c.id}')">
+          <span>${c.icon} ${c.name}</span>
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      `).join('')}
+    </aside>
+  `;
+}
+
+function renderCategory(app, cat) {
+  app.innerHTML = `
+    <div class="layout">
+      ${renderSidebar(cat.id)}
+      <main class="cat-view">
+        <h1>${cat.icon} ${cat.name}</h1>
+        <p class="cat-desc">${cat.desc}</p>
+        <ul class="article-list">
+          ${cat.articles.map(a => `
+            <li>
+              <a href="#${cat.id}/${a.id}" onclick="navigate('${cat.id}/${a.id}');return false;">
+                ${a.title}
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            </li>
+          `).join('')}
+        </ul>
+      </main>
+    </div>
+  `;
+}
+
+function renderArticle(app, cat, art) {
+  const idx = cat.articles.indexOf(art);
+  const prev = idx > 0 ? cat.articles[idx - 1] : null;
+  const next = idx < cat.articles.length - 1 ? cat.articles[idx + 1] : null;
+
+  app.innerHTML = `
+    <div class="layout">
+      ${renderSidebar(cat.id)}
+      <main class="article-view">
+        <h1>${art.title}</h1>
+        <div class="article-meta">MHRC Help Center &nbsp;·&nbsp; ${cat.name}</div>
+        <div class="article-body">${art.body}</div>
+        <div class="article-nav">
+          ${prev ? `<a href="#${cat.id}/${prev.id}" onclick="navigate('${cat.id}/${prev.id}');return false;"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> ${prev.title}</a>` : '<span></span>'}
+          ${next ? `<a class="next" href="#${cat.id}/${next.id}" onclick="navigate('${cat.id}/${next.id}');return false;">${next.title} <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>` : '<span></span>'}
+        </div>
+      </main>
+    </div>
+  `;
+}
+
+function renderSearch(app, query) {
+  const q = query.toLowerCase();
+  const results = [];
+  CATEGORIES.forEach(cat => {
+    cat.articles.forEach(art => {
+      const inTitle = art.title.toLowerCase().includes(q);
+      const inBody = art.body.toLowerCase().replace(/<[^>]+>/g, '').includes(q);
+      if (inTitle || inBody) {
+        results.push({ cat, art, inTitle });
+      }
+    });
+  });
+  results.sort((a, b) => (b.inTitle ? 1 : 0) - (a.inTitle ? 1 : 0));
+
+  app.innerHTML = `
+    <div class="search-results">
+      <h2>${results.length > 0 ? `${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"` : `No results for "${query}"`}</h2>
+      ${results.length === 0 ? `<p class="no-results">Try different keywords, or browse the topics above.</p>` : ''}
+      ${results.map(r => `
+        <div class="search-result-item" onclick="navigate('${r.cat.id}/${r.art.id}')">
+          <h3>${r.art.title}</h3>
+          <p>${r.cat.icon} ${r.cat.name}</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ── SEARCH HANDLER ───────────────────────────────────────────────
+function handleSearch(val) {
+  if (val.length > 1) {
+    render();
+  } else if (val.length === 0) {
+    render();
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
